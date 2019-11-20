@@ -16,19 +16,21 @@ var OpenTrivia = {
 
     initializeApp: function () {
         console.debug("Initialize app ..");
-        $(".quiz").hide();
-        $("[id^=answer]").hide();
+ 
 
         this.fetchCategories();
         this.initializeCategories();
         this.iQuestion = 0;
 
-        $(".answer").on( "click", function() {
-            console.log( "event object:" );
-            console.dir( event );
-            var elem = $(this);     
+        $(".answer").on("click", this.handleRadioClicked);
+
+
+  /*       $(".answer").on("click", function () {
+            console.log("event object:");
+            console.dir(event);
+            var elem = $(this);
             OpenTrivia.handleRadioClicked(elem);
-        });
+        }); */
     },
 
     /**
@@ -60,10 +62,10 @@ var OpenTrivia = {
      * initialize categories selection
      */
     initializeCategories: function () {
-        for (let cat of this.categories) {
-            console.log("category: " + cat['id'] + ": " + cat["name"]);
+        this.categories.forEach(cat => {
+            console.log("category: " + cat.id + ": " + cat.name);
             $("#category").append('<option value="' + cat.id + '">' + cat.name + '</option>')
-        }
+        });
     },
 
     /**
@@ -115,8 +117,9 @@ var OpenTrivia = {
     },
 
     handleRadioClicked: function(elem) {
-        console.debug("radio clicked: " + elem.val());
-        if (this.iRight == elem.val()) {
+        elem = $(this)
+        console.debug("radio clicked: " + OpenTrivia.iRight + ' ' + elem.val());
+        if (OpenTrivia.iRight == elem.val()) {
             $("#answer_correct").show();
         } else {
             $("#answer_wrong").show();

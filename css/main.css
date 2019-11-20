@@ -9,6 +9,10 @@
 
 
 
+body {
+  padding: 10px;
+}
+
  .header {
   background: #f2f2f2;
   text-align: center;
@@ -26,6 +30,10 @@
 #answer_wrong {
   background-color: red;
 }
+
+
+
+
 
 /* ==========================================================================
    Base styles: opinionated defaults
