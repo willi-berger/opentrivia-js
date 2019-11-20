@@ -3,11 +3,11 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    willi b. -- developer -- <twitter>
 
 # THANKS
 
-    <name>
+    MDN mozilla developer network for the great tutorials
 
 # TECHNOLOGY COLOPHON
 
