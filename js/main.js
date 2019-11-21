@@ -50,6 +50,7 @@ const fetchCategories = function () {
 const fetchQuestions = function (category, difficulty, num) {
 
     return new Promise((resolve, reject) => {
+        // ToDo: first fetch the number of avail quetions; not for all difficulty and category there are 10!
         console.log(`going to fetch ${num} questions with difficulty ${difficulty} for category ${category}`)
         let url = URL_QUESTION + `?amount=${num}&category=${category}&difficulty=${difficulty}&type=multiple`
         fetch(url).then(response => {
@@ -59,7 +60,6 @@ const fetchQuestions = function (category, difficulty, num) {
             console.debug("JSON:" + json)
             questions = json.results
             numQuestions = questions.length
-            iQuestion = 1
             resolve(json.results)
         }).catch(error => {
             reject("Error retrieving questions: " + error.message)
@@ -80,15 +80,7 @@ const initializeApp = function () {
         console.log('got result :' + result)
         console.dir(categories)
         initializeCategorySelection('#category', categories)
-
-        // fetch the first questions for selected category and difficulty
-        return fetchQuestions($('#category').val(), $('#difficulty').val(), 10)
-
-    }).then(questions => {
-        console.log('got questions ..')
-        console.dir(questions)
-        $('#info').html( `${iQuestion}/${numQuestions}`)
-        updateQuestionForm(questions[0])
+        startNewGame()
 
     }).catch(rejected => {
         console.error('not resolved, some problem occured: ' + rejected)
@@ -106,8 +98,21 @@ const initializeCategorySelection = function (id, categories) {
     });
 }
 
-const updateQuestionForm = function (question) {
+const startNewGame = function () {
 
+    fetchQuestions($('#category').val(), $('#difficulty').val(), 10).then(questions => {
+        console.log('got questions ..')
+        console.dir(questions)
+        iQuestion = 0
+        updateQuestionForm(questions[iQuestion])
+    }).catch(rejected => {
+        console.error('not resolved, some problem occured: ' + rejected)
+    })
+}
+
+const updateQuestionForm = function (question) {
+    $(".quiz").fadeOut(1500)
+    // ToDo wait until faded out ... next question is already visible
     $('#question').html(question['question']);
     iRight = getRandomInt(4)
     var iwrong = 0
@@ -118,7 +123,8 @@ const updateQuestionForm = function (question) {
             $("#labela" + i).html(question['incorrect_answers'][iwrong++])
         }
     }
-    $(".quiz").fadeIn(2000)
+    $('#info').html( `${iQuestion + 1}/${numQuestions}`)
+    $(".quiz").fadeIn(1500)
 }
 
 const getRandomInt = function (max) {
@@ -137,8 +143,17 @@ const handleRadioClicked = function (event) {
     $('#score').html(score)
 }
 
+const handleBtnStartClicked = function() {
+    console.debug("button start clicked")
+    startNewGame()
+}
+
 const handleBtnNextQuestion = function (event) {
     console.log("button next clicked")
+    $("[id^=answer]").hide()
+    if (++iQuestion < numQuestions -1) {
+        updateQuestionForm(questions[iQuestion])
+    }
 }
 
 /**
@@ -152,5 +167,6 @@ $(document).ready(function () {
     initializeApp()
     $(".answer").on("click", handleRadioClicked)
     $("#btn_next_question").click(handleBtnNextQuestion)
+    $("#btn_start_quiz").click(handleBtnStartClicked)
 
 })

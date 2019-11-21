@@ -10,11 +10,26 @@
 
 
 body {
-  padding: 10px;
+  padding: 5px;
 }
 
- .header {
-  background: #f2f2f2;
+.header {
+  background: yellow;
+  padding:1em;
+  margin: 0.5em;
+  text-align: center;
+}
+
+.select_and_start {
+  background: yellowgreen;
+  padding: 1em;
+  margin: 0.5em;
+}
+
+.quiz {
+  background: yellow;
+  padding:1em;
+  margin: 0.5em;
   text-align: center;
 }
 

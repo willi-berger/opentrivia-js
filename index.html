@@ -25,13 +25,11 @@
     <img src="./img/opentrivia.png" alt="Open Trivia Logo" height="100px">
     <h1>Trivia Quiz</h1>
   </div>
-  <div><p>Select category and difficulty and start the quiz</p></div>
-  <form action="">
+  <div class="select_and_start"><p>Select category and difficulty and start the quiz</p>
     <div>
       <label for="category">Category</label>
       <select name="category" id="category"></select>
     </div>
-
     <div>
       <label for="level">Difficulty</label>
       <select name="difficulty" id="difficulty">
@@ -39,20 +37,16 @@
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
+      <input type="button" id="btn_start_quiz" value="Start Quiz">
+  
     </div>
-  </form>
-
-  <div>
-    <input type="button" id="btn_start_quiz" value="Start Quiz">
   </div>
 
-  <div>Info:<span id="info"></span>
-  </div>
-  <div>
-    Score:<span id="score">0</span>
-  </div>
+  
 
   <div class="quiz">
+      <div>Question:&nbsp;<span id="info"></span>&nbsp;Score:&nbsp;<span id="score">0</span></div>
+
     <div class="question">
       <p id="question"></p>
     </div>
@@ -74,15 +68,18 @@
         <label id="labela3" for="a3"></label>
       </div>
     </div>
-  </div>
-  <div>
-    <p id="answer_correct">Correct Answer :)</p>
-    <p id="answer_wrong">Wrong Answer :(</p>
-  </div>
-  <div>
-    <input type="button" id="btn_next_question" value="Next">
-  </div>
 
+      <div>
+        <p id="answer_correct">Correct Answer :)</p>
+        <p id="answer_wrong">Wrong Answer :(</p>
+      </div>
+      <div>
+        <input type="button" id="btn_next_question" value="Next">
+      </div>
+  </div>
+    
+    
+  </div>
 
 
 
@@ -95,5 +92,4 @@
   <script src="js/main.js"></script>
  
 </body>
-
 </html>
