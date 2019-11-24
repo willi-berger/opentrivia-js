@@ -22,15 +22,16 @@
   <![endif]-->
 
   <div class="header">
-    <img src="./img/opentrivia.png" alt="Open Trivia Logo" height="100px">
+    <img src="./img/opentrivia.png" alt="Open Trivia Logo" height="80px">
     <h1>Trivia Quiz</h1>
   </div>
-  <div class="select_and_start"><p>Select category and difficulty and start the quiz</p>
-    <div>
+  <div class="select_and_start">
+    <!-- <h2>Select category and difficulty and start the quiz</h2> -->
+    <div class="formrow">
       <label for="category">Category</label>
       <select name="category" id="category"></select>
     </div>
-    <div>
+    <div class="formrow">
       <label for="level">Difficulty</label>
       <select name="difficulty" id="difficulty">
         <option value="easy">Easy</option>
@@ -38,58 +39,50 @@
         <option value="hard">Hard</option>
       </select>
       <input type="button" id="btn_start_quiz" value="Start Quiz">
-  
+
     </div>
   </div>
 
-  
 
   <div class="quiz">
-      <div>Question:&nbsp;<span id="info"></span>&nbsp;Score:&nbsp;<span id="score">0</span></div>
-
-    <div class="question">
-      <p id="question"></p>
-    </div>
-    <div class="answers">
-      <div>
-        <input type="radio" id="a0" name="answer" class="answer" value="0">
-        <label id="labela0" for="a0"></label>
-      </div>
-      <div>
-        <input type="radio" id="a1" name="answer" class="answer" value="1">
-        <label id="labela1" for="a1"></label>
-      </div>
-      <div>
-        <input type="radio" id="a2" name="answer" class="answer" value="2">
-        <label id="labela2" for="a2"></label>
-      </div>
-      <div>
-        <input type="radio" id="a3" name="answer" class="answer" value="3">
-        <label id="labela3" for="a3"></label>
-      </div>
+    <div class="score__and_count">Question:&nbsp;<span id="info"></span>&nbsp;Score:&nbsp;<span id="score">0</span>
     </div>
 
+    <div class="question_and_anwers">
+      <div class="question">
+        <p id="question"></p>
+      </div>
+      <div class="answers">
+        <div class="answerline" id="a0"> <span class="abcd">A</span> <span class="answer" id="labela0"></span> </div>
+        <div class="answerline" id="a1"> <span class="abcd">B</span> <span class="answer" id="labela1"></span> </div>
+        <div class="answerline" id="a2"> <span class="abcd">C</span> <span class="answer" id="labela2"></span> </div>
+        <div class="answerline" id="a3"> <span class="abcd">D</span> <span class="answer" id="labela3"></span> </div>
+      </div>
       <div>
         <p id="answer_correct">Correct Answer :)</p>
         <p id="answer_wrong">Wrong Answer :(</p>
       </div>
+
+      <hr />
       <div>
         <input type="button" id="btn_next_question" value="Next">
       </div>
-  </div>
-    
-    
-  </div>
+
+    </div>
 
 
 
-  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
-  <script src="js/plugins.js"></script>
-  <script src="js/opentrivia.js"></script>
-  <script src="js/main.js"></script>
- 
+
+
+
+    <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+    <script src="js/opentrivia.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
+
 </html>

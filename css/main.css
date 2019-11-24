@@ -14,24 +14,70 @@ body {
 }
 
 .header {
-  background: yellow;
+  background: rgba(233, 233, 81, 0.836);
   padding:1em;
   margin: 0.5em;
   text-align: center;
 }
 
 .select_and_start {
-  background: yellowgreen;
+  background: rgba(153, 205, 50, 0.589);
   padding: 1em;
   margin: 0.5em;
 }
 
 .quiz {
-  background: yellow;
+  background: rgba(233, 233, 81, 0.836);
   padding:1em;
   margin: 0.5em;
   text-align: center;
 }
+
+.formrow label{
+  display: inline-block;
+  width:70px;
+}
+
+.score__and_count {
+  font-size: large;
+}
+
+.question {
+  font-size: larger;
+  border: 2px solid  black;
+  border-radius: 1em;
+  margin: 1em;
+}
+
+.answers {
+  display: inline-block;
+  text-align: left;
+} 
+
+.answerline {
+ border:2px solid black;
+ border-radius: 0.5em;
+ background-color: cadetblue;
+ padding: 0.5em;
+ margin:0.2em;
+}
+
+.abcd {
+  border:1px solid black;
+  border-radius: 1em;
+  background-color: lightsalmon;
+  padding: 0.1em;
+}
+
+.answer {
+  padding-right: 50px;
+}
+.answerline:hover{
+  background-color: darkcyan;
+}
+
+
+
 
 /* .quiz {
   visibility: hidden;

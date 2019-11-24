@@ -9,12 +9,10 @@ $(document).ready(function () {
 });
  */
 
-const URL_CATEGORIES =  "https://opentdb.com/api_category.php"
-//const URL_CATEGORIES = "./categories.json"
-const URL_QUESTION = "https://opentdb.com/api.php"
-//const URL_QUESTION = "./question.json"
+
 let categories = []
 let questions = []
+const numQuestionsFetch = 5
 let numQuestions = 0
 let iQuestion = 0
 let iRight = 0
@@ -27,7 +25,9 @@ const fetchCategories = function () {
     
     return new Promise((resolve, reject) => {
 
-        console.log('going to fetch categories')
+        const URL_CATEGORIES =  "https://opentdb.com/api_category.php"
+        //const URL_CATEGORIES = "./categories.json"
+        console.log('going to fetch categories: ' + URL_CATEGORIES)
         fetch(URL_CATEGORIES).then(response => {
             console.debug("response" + response)
             return response.json()
@@ -50,6 +50,10 @@ const fetchCategories = function () {
 const fetchQuestions = function (category, difficulty, num) {
 
     return new Promise((resolve, reject) => {
+
+        const URL_QUESTION = "https://opentdb.com/api.php"
+        //const URL_QUESTION = "./question.json"
+        
         // ToDo: first fetch the number of avail quetions; not for all difficulty and category there are 10!
         console.log(`going to fetch ${num} questions with difficulty ${difficulty} for category ${category}`)
         let url = URL_QUESTION + `?amount=${num}&category=${category}&difficulty=${difficulty}&type=multiple`
@@ -100,7 +104,7 @@ const initializeCategorySelection = function (id, categories) {
 
 const startNewGame = function () {
 
-    fetchQuestions($('#category').val(), $('#difficulty').val(), 10).then(questions => {
+    fetchQuestions($('#category').val(), $('#difficulty').val(), numQuestionsFetch).then(questions => {
         console.log('got questions ..')
         console.dir(questions)
         iQuestion = 0
@@ -111,7 +115,7 @@ const startNewGame = function () {
 }
 
 const updateQuestionForm = function (question) {
-    $(".quiz").fadeOut(1500)
+    $(".question_and_anwers").fadeOut(1500)
     // ToDo wait until faded out ... next question is already visible
     $('#question').html(question['question']);
     iRight = getRandomInt(4)
@@ -124,7 +128,7 @@ const updateQuestionForm = function (question) {
         }
     }
     $('#info').html( `${iQuestion + 1}/${numQuestions}`)
-    $(".quiz").fadeIn(1500)
+    $(".question_and_anwers").fadeIn(1500)
 }
 
 const getRandomInt = function (max) {
@@ -133,8 +137,8 @@ const getRandomInt = function (max) {
 
 const handleRadioClicked = function (event) {
     elem = $(this)
-    console.debug("radio clicked: " + iRight + ' ' + elem.val());
-    if (iRight == elem.val()) {
+    console.debug("radio clicked: " + iRight + ' t:' + event.target.id + ' ct:' + event.currentTarget.id)
+    if ("a"+iRight == event.currentTarget.id) {
         $("#answer_correct").show();
         score += 1;
     } else {
@@ -162,10 +166,10 @@ const handleBtnNextQuestion = function (event) {
 $(document).ready(function () {
     console.log('document ready ' + this)
 
-    $(".quiz").hide()
+    $(".question_and_anwers").hide()
     $("[id^=answer]").hide()
     initializeApp()
-    $(".answer").on("click", handleRadioClicked)
+    $(".answerline").on("click", handleRadioClicked)
     $("#btn_next_question").click(handleBtnNextQuestion)
     $("#btn_start_quiz").click(handleBtnStartClicked)
 
