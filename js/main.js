@@ -17,6 +17,7 @@ let numQuestions = 0
 let iQuestion = 0
 let iRight = 0
 let score = 0
+let answerLock = false
 
 /**
  * fetch categories from OpenTrivia
@@ -108,6 +109,8 @@ const startNewGame = function () {
         console.log('got questions ..')
         console.dir(questions)
         iQuestion = 0
+        score = 0
+        answerLock = false
         updateQuestionForm(questions[iQuestion])
     }).catch(rejected => {
         console.error('not resolved, some problem occured: ' + rejected)
@@ -115,7 +118,6 @@ const startNewGame = function () {
 }
 
 const updateQuestionForm = function (question) {
-    $(".question_and_anwers").fadeOut(1500)
     // ToDo wait until faded out ... next question is already visible
     $('#question').html(question['question']);
     iRight = getRandomInt(4)
@@ -128,7 +130,7 @@ const updateQuestionForm = function (question) {
         }
     }
     $('#info').html( `${iQuestion + 1}/${numQuestions}`)
-    $(".question_and_anwers").fadeIn(1500)
+    $(".question_and_anwers").fadeIn(2500)
 }
 
 const getRandomInt = function (max) {
@@ -138,6 +140,11 @@ const getRandomInt = function (max) {
 const handleRadioClicked = function (event) {
     elem = $(this)
     console.debug("radio clicked: " + iRight + ' t:' + event.target.id + ' ct:' + event.currentTarget.id)
+    if (answerLock) {
+        console.debug("answerLock")
+        return
+    }
+    answerLock = true
     if ("a"+iRight == event.currentTarget.id) {
         $("#answer_correct").show();
         score += 1;
@@ -154,9 +161,13 @@ const handleBtnStartClicked = function() {
 
 const handleBtnNextQuestion = function (event) {
     console.log("button next clicked")
+    $(".question_and_anwers").hide();
     $("[id^=answer]").hide()
-    if (++iQuestion < numQuestions -1) {
+    answerLock = false
+    if (iQuestion++ < numQuestions -1) {
         updateQuestionForm(questions[iQuestion])
+    } else {
+        alert("No more questions.")
     }
 }
 

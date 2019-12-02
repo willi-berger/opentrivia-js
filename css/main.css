@@ -46,7 +46,7 @@ body {
   font-size: larger;
   border: 2px solid  black;
   border-radius: 1em;
-  margin: 1em;
+  margin: 0.5;
 }
 
 .answers {
@@ -64,9 +64,9 @@ body {
 
 .abcd {
   border:1px solid black;
-  border-radius: 1em;
+  border-radius: 3px;
   background-color: lightsalmon;
-  padding: 0.1em;
+  padding: 0.3em;
 }
 
 .answer {
@@ -76,7 +76,9 @@ body {
   background-color: darkcyan;
 }
 
-
+#btn_next_question {
+  padding: 0 2em;
+}
 
 
 /* .quiz {
